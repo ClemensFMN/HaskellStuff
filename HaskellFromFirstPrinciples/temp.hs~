@@ -1,0 +1,16 @@
+data Vielleicht a = Nix | Wert a deriving (Eq, Show)
+
+instance Functor Vielleicht where
+  fmap _ Nix = Nix
+  fmap f (Wert a) = Wert (f a)
+
+--fmap (\x->x+1) (Wert 4)
+
+
+
+--let liftedInc = fmap (\x -> x+1)
+
+--liftedInc [1..3]
+--liftedInc (Just 4)
+
+-- fmap (\x -> x+1) (Just 1)
