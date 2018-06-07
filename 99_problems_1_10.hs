@@ -22,6 +22,39 @@ myButLast (x:xs) = myButLast xs
 -- myButLast [1]
 -- myButLast []
 
+
+-- problem 3: Find the K'th element of a list. 
+
+-- fails if index > length of list
+elementAt :: [a] -> Int -> a
+elementAt (x:xs) pos
+    | pos == 0 = x
+    | otherwise = elementAt xs (pos-1)
+
+elementAt' :: [a] -> Int -> a
+elementAt' (x:_) 1  = x
+elementAt' [] _     = error "Index out of bounds"
+elementAt' (_:xs) k
+  | k < 1           = error "Index out of bounds"
+  | otherwise       = elementAt' xs (k - 1)
+
+
+-- problem 4: # of list elements
+myLength :: [a] -> Int
+myLength [] = 0
+myLength (x:xs) = 1 + myLength xs
+
+
+-- problem 6: check for palindrome
+checkPalindrome :: Eq a => [a] -> Bool
+checkPalindrome xs = xs == reverse xs
+
+-- checkPalindrome [1,2,3]
+-- checkPalindrome [1,2,3,2,1]
+-- checkPalindrome "Hello"
+-- checkPalindrome "apa"
+
+
 -- import qualified Data.List
 
 -- problem 8: Eliminate consecutive duplicates of list elements
