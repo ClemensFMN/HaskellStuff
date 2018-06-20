@@ -12,4 +12,26 @@ myfrac n =
     then 1
     else n * myfrac (n-1)
 
+myfilter :: (a -> Bool) -> [a] -> [a]
+myfilter _ [] = []
+myfilter f (x:xs)
+             | f x == True = x : myfilter f xs
+             | otherwise = myfilter f xs
+
+
+-- myfilter even [1..5]
+-- myfilter (not . even) [1..5]
+
+
+-- it is somehow not possible to define this as a recursive function
+-- mypartition f [] = [] -- this has return type []
+-- mypartition f (x:xs) -- but the stuff below has return type ([a],[a]) -> this does not match...
+--                   | f x == True = (x : mypartition f xs, mypartition f xs)
+--                   | otherwise   = (mypartition f xs, x : mypartition f xs)
+
+mypartition :: (a -> Bool) -> [a] -> ([a],[a])
+mypartition f xs = (myfilter f xs, myfilter (not . f) xs)
+
+--mypartition even [1..10]
+
 
